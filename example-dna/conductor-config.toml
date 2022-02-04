@@ -1,0 +1,63 @@
+bridges = []
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+[[agents]]
+id = 'hc-alice'
+keystore_file = './alice.keystore'
+name = 'alice'
+public_address = 'HcSCjcNW9C6k8U6vofmICxgMV8e5pdmsk5aeca9ejZHvsagae8hprf6EWXyaoni'
+
+[[agents]]
+id = 'hc-bob'
+keystore_file = './bob.keystore'
+name = 'bob'
+public_address = 'HcSciGq3EHu4Dppzfr5KS8N4Bx49t5sNyayFzmWOJabs5cr5jzBQ5rsM5S68t3r'
+
+[[dnas]]
+file = './dist/example-dna.dna.json'
+hash = 'QmTGLFwrDyupvjfBSpKnGQybVS56q4nZuBwQVA15Y2Y6w2'
+id = 'hc-triangulation'
+
+[[instances]]
+agent = 'hc-alice'
+dna = 'hc-triangulation'
+id = 'alice-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[interfaces]]
+admin = true
+id = 'alice-interface'
+
+[[interfaces.instances]]
+id = 'alice-instance'
+
+[interfaces.driver]
+port = 8888
+type = 'http'
+
+[[instances]]
+agent = 'hc-bob'
+dna = 'hc-triangulation'
+id = 'bob-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[interfaces]]
+admin = true
+id = 'bob-interface'
+
+[[interfaces.instances]]
+id = 'bob-instance'
+
+[interfaces.driver]
+port = 8889
+type = 'http'
+
+[network]
+type = "sim2h"
+sim2h_url = 'ws://localhost:9000'
